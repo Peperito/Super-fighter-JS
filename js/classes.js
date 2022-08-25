@@ -80,6 +80,7 @@ class Fighter extends Sprite {
         this.framesElapsed = 0
         this.framesHold = 10
         this.sprites = sprites
+        this.isBlocking = true
         this.dead = false
 
         for(const sprite in this.sprites) {
@@ -121,7 +122,11 @@ class Fighter extends Sprite {
 
     takeHit(){
 
-        this.health -= 20;
+        if(this.isBlocking){
+            this.health -= 5;
+        } else {
+            this.health -= 20;
+        }
 
         if (this.health <= 0 ) {
             this.switchSprite('death');
@@ -138,13 +143,15 @@ class Fighter extends Sprite {
             }
             return 
         }
-        
+
         if ( this.image === this.sprites.attack1.image && this.framesCurrent < this.sprites.attack1.framesMax -1 ) return
         if ( this.image === this.sprites.takeHit.image && this.framesCurrent < this.sprites.takeHit.framesMax -1 ) return
 
         switch(sprite) {
             case 'idle':
                 if ( this.image !== this.sprites.idle.image) {
+                    this.isBlocking = true
+                    console.log(this.isBlocking )
                     this.image = this.sprites.idle.image
                     this.framesMax = this.sprites.idle.framesMax
                     this.framesCurrent = 0
@@ -152,6 +159,8 @@ class Fighter extends Sprite {
             break;
             case 'run':
                 if ( this.image !== this.sprites.run.image) {
+                    this.isBlocking = false
+                    console.log(this.isBlocking )
                     this.image = this.sprites.run.image
                     this.framesMax = this.sprites.run.framesMax
                     this.framesCurrent = 0
@@ -159,6 +168,7 @@ class Fighter extends Sprite {
             break;
             case 'jump':
                 if ( this.image !== this.sprites.jump.image) {
+                    this.isBlocking = false
                     this.image = this.sprites.jump.image
                     this.framesMax = this.sprites.jump.framesMax
                     this.framesCurrent = 0
@@ -166,6 +176,7 @@ class Fighter extends Sprite {
             break;
             case 'fall':
                 if ( this.image !== this.sprites.fall.image) {
+                    this.isBlocking = false
                     this.image = this.sprites.fall.image
                     this.framesMax = this.sprites.fall.framesMax
                     this.framesCurrent = 0
@@ -173,6 +184,7 @@ class Fighter extends Sprite {
             break;
             case 'attack1':
                 if ( this.image !== this.sprites.attack1.image) {
+                    this.isBlocking = false
                     this.image = this.sprites.attack1.image
                     this.framesMax = this.sprites.attack1.framesMax
                     this.framesCurrent = 0
@@ -180,6 +192,7 @@ class Fighter extends Sprite {
             break;
             case 'takeHit':
                 if ( this.image !== this.sprites.takeHit.image) {
+                    this.isBlocking = false
                     this.image = this.sprites.takeHit.image
                     this.framesMax = this.sprites.takeHit.framesMax
                     this.framesCurrent = 0

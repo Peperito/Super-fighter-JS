@@ -21,6 +21,8 @@ https://www.youtube.com/watch?v=vyqbNFMDRGQ&ab_channel=ChrisCourses
 
 - Restrain characters on the x-axis
 
+- Adding Auto-Block
+
 ### To be done
 
 - Freeze character while Taking Damage
