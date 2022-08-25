@@ -9,7 +9,7 @@
             box-sizing: border-box;
             font-family: 'Press Start 2P', cursive;
         }
-        html, body{
+        html{
 
         background-image: url(assets/jp-bg.jpg); background-repeat: no-repeat; background-size: cover;
         min-height: 100%;
@@ -24,8 +24,8 @@
 </head>
 
 <body>
-    <div style="background-color: #818CF8; border: solid 4px white; width:100%; color: white;
-            padding: 25px; text-align: center; margin-bottom: 5%;
+    <div style="background-color: rgba(0, 0, 0, 0.29); border: solid 4px white; width:100%; color: white;
+            padding: 25px; text-align: center; margin-bottom: 5%; margin-top: 5%;
             ">
         <h1> There can only be one!</h1>
     </div>
@@ -72,6 +72,24 @@
         </div>
 
         <canvas></canvas>
+
+        <div style="display: flex; flex-direction: row; justify-content: space-between; color: white; margin-top: 5%; background: rgba(0, 0, 0, 0.29);
+                border: solid 4px white; width:100%; padding: 12px;">
+            <div style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                <p> Player1 Controls:</p>
+                <p> a-d - Left-Right</p>
+                <p> w - Jump</p>
+                <p> SpaceBar - Attack</p>
+                
+            </div>
+            <div style="display: flex; flex-direction: column;">
+                <p> Player2 Controls:</p>
+                <p> <- -> - Left-Right</p>
+                <p> ↑ - Jump</p>
+                <p> ↓ - Attack</p>
+            </div>
+        </div>
+
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/gsap.min.js" integrity="sha512-GQ5/eIhs41UXpG6fGo4xQBpwSEj9RrBvMuKyE2h/2vw3a9x85T1Bt0JglOUVJJLeyIUl/S/kCdDXlE/n7zCjIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
