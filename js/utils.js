@@ -7,6 +7,16 @@ function rectangularCollision ({rectangle1, rectangle2}){
     )
 }
 
+function startFight(timer){
+
+    if(timer >= 58){
+        document.querySelector('#result').style.display = "flex";
+        document.querySelector('#result').innerHTML = "Fight!";
+    } else {
+        document.querySelector('#result').style.display = "none";
+    }
+}
+
 function determineWinner({player, enemy, timerId}) {
 
     clearTimeout(timerId);
@@ -20,9 +30,6 @@ function determineWinner({player, enemy, timerId}) {
         document.querySelector('#result').innerHTML = "Player2 wins"
     }
 }
-
-let timer = 60;
-let timerId;
 
 function decreaseTimer() {
     

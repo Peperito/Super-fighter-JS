@@ -84,7 +84,8 @@ const player = new Fighter({
         },
         width: 155,
         height: 50
-    }
+    },
+    health: 100,
 })
 
 const enemy = new Fighter({
@@ -140,7 +141,8 @@ const enemy = new Fighter({
         },
         width: 165,
         height: 50
-    }
+    },
+    health: 80,
 })
 
 const keys = {
@@ -164,6 +166,9 @@ const keys = {
     },
 }
 
+let timer = 60;
+let timerId;
+
 decreaseTimer();
 
 function animate(){
@@ -179,6 +184,8 @@ function animate(){
 
     player.update();
     enemy.update();
+
+    startFight(timer);
 
     player.velocity.x = 0;
     enemy.velocity.x = 0;
@@ -265,6 +272,7 @@ function animate(){
     if (enemy.health <= 0 || player.health <=0 ){
         determineWinner({player, enemy, timerId});
     }
+    
 }
 
 animate();
