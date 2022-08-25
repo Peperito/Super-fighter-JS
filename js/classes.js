@@ -138,7 +138,7 @@ class Fighter extends Sprite {
             }
             return 
         }
-
+        
         if ( this.image === this.sprites.attack1.image && this.framesCurrent < this.sprites.attack1.framesMax -1 ) return
         if ( this.image === this.sprites.takeHit.image && this.framesCurrent < this.sprites.takeHit.framesMax -1 ) return
 

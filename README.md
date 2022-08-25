@@ -9,7 +9,7 @@ https://vincep-super-fighter.netlify.app/
 ### Done 
 
 - Created intial structure following this Tutorial from Chris Course:
-https://www.youtube.com/watch?v=vyqbNFMDRGQ&ab_channel=ChrisCourses
+https://www.youtube.com/watch?v=vyqbNFMDRGQ&ab_channel=ChrisCourses 
 
 - Added Background, Title and page decoration
 
@@ -17,11 +17,13 @@ https://www.youtube.com/watch?v=vyqbNFMDRGQ&ab_channel=ChrisCourses
 
 - Added different health value for each character
 
-### To be done
-
 - Only allow 1 jump
 
+### To be done
+
 - Restrain characters on the x-axis
+
+- Freeze character while Taking Damage
 
 - Create Super Attack with custom animation
 
