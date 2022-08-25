@@ -191,7 +191,7 @@ function animate(){
     enemy.velocity.x = 0;
 
     //player movement
-    if(keys.d.pressed && player.lastKey === 'd' && player.position.x < 980){
+    if(keys.d.pressed && player.lastKey === 'd' && player.position.x < 970){
         player.velocity.x = 5;
         player.switchSprite('run');
     } else if (keys.a.pressed && player.lastKey === 'a' && player.position.x > 0) {
