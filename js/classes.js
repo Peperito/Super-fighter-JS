@@ -218,11 +218,10 @@ class Ai {
     }
 
     AiAttack(){
-        if ( this.self.image === this.self.sprites.attack1.image && this.self.framesCurrent < this.self.sprites.attack1.framesMax -1 ) return;
         window.dispatchEvent(new KeyboardEvent('keydown', {
             'key': 'ArrowDown'
         }));
-        this.self.switchSprite('idle');
+        console.log('attacked')
         window.dispatchEvent(new KeyboardEvent('keyup', {
             'key': 'ArrowDown'
         }));
@@ -272,13 +271,14 @@ class Ai {
     decideAction(r){
 
         if(Math.abs(this.self.position.x - this.enemy.position.x) < 200 ){
-            if(r < 0.80){
+            if ( this.self.image === this.self.sprites.attack1.image && this.self.framesCurrent < this.self.sprites.attack1.framesMax -1 ) return;
+            if(r < 0.4){
                 this.AiAttack();
             }
         }
 
         if(this.self.position.y > this.enemy.position.y){
-            if(r < 0.1){
+            if(r < 0.2){
                 this.AiJump();
             }
         }
@@ -312,6 +312,22 @@ class Ai {
                 this.AiMoveRight();
             } else {
                 this.AiMoveLeft();
+            }
+        }
+
+        if(this.self.position.x < 50){
+            if(r < 0.90){
+                this.AiMoveRight();
+            } else {
+                this.AiMoveLeft();
+            }
+        }
+
+        if(this.self.position.x > 920){
+            if(r < 0.90){
+                this.AiMoveLeft();
+            } else {
+                this.AiMoveRight();
             }
         }
 

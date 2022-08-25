@@ -23,13 +23,19 @@ https://www.youtube.com/watch?v=vyqbNFMDRGQ&ab_channel=ChrisCourses
 
 - Adding Auto-Block
 
-### To be done
-
 - Create AI for enemy
 
-- Freeze character while Taking Damage
+- Created new Frames on Hit to balance the game
+
+### To be done
+
+- Add Stun lock (less frames on block)
+
+- Add custom block animation
 
 - Create Super Attack with custom animation
+
+- Improve AI
 
 
 
