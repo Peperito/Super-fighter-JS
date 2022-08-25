@@ -41,5 +41,6 @@ function decreaseTimer() {
 
     if(timer === 0 ){
         determineWinner({player, enemy});
-    }  
+    } 
+    
 }

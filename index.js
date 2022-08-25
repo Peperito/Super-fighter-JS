@@ -8,6 +8,17 @@ c.fillRect(0,0, canvas.width, canvas.height);
 
 const gravity = 0.7;
 
+// setInterval(function(){   
+//     console.log(Math.floor((Math.random()*100)+1)); 
+//  }, 1000);
+
+let r = Math.random();
+
+setInterval(function(){   
+    r = Math.random(); 
+ }, 400);
+
+
 const background = new Sprite({
     position:{
         x:0,
@@ -145,6 +156,12 @@ const enemy = new Fighter({
     health: 80,
 })
 
+const setAi = document.getElementById('setAi');
+
+setAi.addEventListener('click', function handleClick() {
+    enemy.isAi = true;
+});
+
 const keys = {
     a:{
         pressed: false
@@ -172,6 +189,7 @@ let timerId;
 decreaseTimer();
 
 function animate(){
+    console.log(r)
     window.requestAnimationFrame(animate);
     c.fillStyle = "black";
     c.fillRect(0,0, canvas.width, canvas.height);
@@ -271,6 +289,11 @@ function animate(){
     //end game based on health
     if (enemy.health <= 0 || player.health <=0 ){
         determineWinner({player, enemy, timerId});
+    }
+
+    if(enemy.isAi){
+        const enemyControl = new Ai(enemy, player);
+        enemyControl.decideAction(r);
     }
     
 }

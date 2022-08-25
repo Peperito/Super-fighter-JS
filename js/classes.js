@@ -82,6 +82,7 @@ class Fighter extends Sprite {
         this.sprites = sprites
         this.isBlocking = true
         this.dead = false
+        this.isAi = false
 
         for(const sprite in this.sprites) {
             sprites[sprite].image = new Image()
@@ -204,6 +205,116 @@ class Fighter extends Sprite {
                 }
             break;
         }
+    }
+
+}
+
+class Ai {
+    constructor(self, enemy){
+
+        this.self = self;
+        this.enemy = enemy;
+
+    }
+
+    AiAttack(){
+        if ( this.self.image === this.self.sprites.attack1.image && this.self.framesCurrent < this.self.sprites.attack1.framesMax -1 ) return;
+        window.dispatchEvent(new KeyboardEvent('keydown', {
+            'key': 'ArrowDown'
+        }));
+        this.self.switchSprite('idle');
+        window.dispatchEvent(new KeyboardEvent('keyup', {
+            'key': 'ArrowDown'
+        }));
+    }
+
+    AiJump(){
+        window.dispatchEvent(new KeyboardEvent('keydown', {
+            'key': 'ArrowUp'
+        }));
+
+        window.dispatchEvent(new KeyboardEvent('keyup', {
+            'key': 'ArrowUp'
+        }));
+    }
+
+    AiMoveLeft(){
+        window.dispatchEvent(new KeyboardEvent('keydown', {
+            'key': 'ArrowLeft'
+        }));
+
+        if ( this.image === this.self.sprites.run.image && this.self.framesCurrent < this.self.sprites.run.framesMax - 5){
+            window.dispatchEvent(new KeyboardEvent('keyup', {
+                'key': 'ArrowLeft'
+            }));
+        }
+
+    }
+
+    AiMoveRight(){
+        window.dispatchEvent(new KeyboardEvent('keydown', {
+            'key': 'ArrowRight'
+        }));
+        if ( this.image === this.self.sprites.run.image && this.self.framesCurrent < this.self.sprites.run.framesMax - 5){
+            window.dispatchEvent(new KeyboardEvent('keyup', {
+                'key': 'ArrowRight'
+            }));
+        }
+    }
+    AiBeIdle(){
+        window.dispatchEvent(new KeyboardEvent('keyup', {
+            'key': 'ArrowRight',
+            'key': 'ArrowLeft',
+            'key': 'ArrowUp',
+        }));
+    }
+
+    decideAction(r){
+
+        if(Math.abs(this.self.position.x - this.enemy.position.x) < 200 ){
+            if(r < 0.80){
+                this.AiAttack();
+            }
+        }
+
+        if(this.self.position.y > this.enemy.position.y){
+            if(r < 0.1){
+                this.AiJump();
+            }
+        }
+
+        if(this.self.position.x - this.enemy.position.x > 600){
+            if(r < 0.80){
+                this.AiMoveLeft();
+            } else {
+                this.AiMoveRight();
+            }
+        }
+
+        if(this.self.position.x - this.enemy.position.x > 200 && this.self.position.x - this.enemy.position.x > 200){
+            if(r < 0.50){
+                this.AiMoveLeft();
+            } else {
+                this.AiMoveRight();
+            }
+        }
+
+        if(this.self.position.x - this.enemy.position.x < -600){
+            if(r < 0.80){
+                this.AiMoveRight();
+            } else {
+                this.AiMoveLeft();
+            }
+        }
+
+        if(this.self.position.x - this.enemy.position.x < -200 && this.self.position.x - this.enemy.position.x > -600){
+            if(r < 0.50){
+                this.AiMoveRight();
+            } else {
+                this.AiMoveLeft();
+            }
+        }
+
     }
 
 }
