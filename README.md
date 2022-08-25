@@ -19,9 +19,9 @@ https://www.youtube.com/watch?v=vyqbNFMDRGQ&ab_channel=ChrisCourses
 
 - Only allow 1 jump
 
-### To be done
-
 - Restrain characters on the x-axis
+
+### To be done
 
 - Freeze character while Taking Damage
 
