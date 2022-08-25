@@ -25,6 +25,8 @@ https://www.youtube.com/watch?v=vyqbNFMDRGQ&ab_channel=ChrisCourses
 
 ### To be done
 
+- Create AI for enemy
+
 - Freeze character while Taking Damage
 
 - Create Super Attack with custom animation
