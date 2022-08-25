@@ -252,7 +252,7 @@ function animate(){
         enemy.isAttacking = false;
         
         gsap.to('#playerHealth', {
-            width: enemy.health + '%'
+            width: player.health + '%'
         })
     }   
 
