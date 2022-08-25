@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        *{
+            box-sizing: border-box;
+            font-family: 'Press Start 2P', cursive;
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <title>Fight</title>
+</head>
+
+<body>
+    <!--container div-->
+    <div style="position: relative; display: inline-block;">
+        <!--smaller container-->
+        <div style="position: absolute; display: flex; width:100%; align-items: center; padding: 20px;">
+            <!--player health-->
+            <div style="position: relative; display: flex; justify-content: flex-end;
+            border-top: solid 4px white; width:100%;
+            border-left: solid 4px white; width:100%;
+            border-bottom: solid 4px white; width:100%;
+            ">
+                <div style="background-color: red; height: 30px; width: 100%;">
+                </div>
+                <div style="position: absolute; background: #818CF8; top: 0; right: 0; bottom: 0; width: 100%" id="playerHealth"></div>
+            </div>
+
+            <!--timer-->
+            <div style="background-color: black; color: white; border: solid 4px white; 
+            width:100%; height: 100px; width:100px; flex-shrink: 0; display: flex; align-items: center; justify-content: center;"
+            id="timer"
+            >
+            10
+            </div>
+
+            <!--enemy health-->
+            <div style="position: relative; 
+            border-top: solid 4px white; width:100%;
+            border-right: solid 4px white; width:100%;
+            border-bottom: solid 4px white; width:100%;
+            ">
+                <div style="background-color: red; height: 30px;">
+                </div>
+                <div style="position: absolute; background: #818CF8; top: 0; right: 0; bottom: 0; left: 0;" id="enemyHealth"></div>
+            </div>
+
+        </div>
+
+        <div style="position: absolute; color: white; display: hidden; align-items: center; justify-content: center; top: 0; right: 0; bottom: 0; left: 0;"
+            id="result"
+        >
+            
+        </div>
+
+        <canvas></canvas>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/gsap.min.js" integrity="sha512-GQ5/eIhs41UXpG6fGo4xQBpwSEj9RrBvMuKyE2h/2vw3a9x85T1Bt0JglOUVJJLeyIUl/S/kCdDXlE/n7zCjIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="js/utils.js"> </script>
+    <script src="js/classes.js"> </script>
+    <script src="index.js"> </script>
+</body>
+</html>
