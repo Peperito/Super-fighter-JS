@@ -151,7 +151,6 @@ class Fighter extends Sprite {
             case 'idle':
                 if ( this.image !== this.sprites.idle.image) {
                     this.isBlocking = true
-                    console.log(this.isBlocking )
                     this.image = this.sprites.idle.image
                     this.framesMax = this.sprites.idle.framesMax
                     this.framesCurrent = 0
@@ -160,7 +159,6 @@ class Fighter extends Sprite {
             case 'run':
                 if ( this.image !== this.sprites.run.image) {
                     this.isBlocking = false
-                    console.log(this.isBlocking )
                     this.image = this.sprites.run.image
                     this.framesMax = this.sprites.run.framesMax
                     this.framesCurrent = 0
