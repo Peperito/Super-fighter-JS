@@ -8,10 +8,6 @@ c.fillRect(0,0, canvas.width, canvas.height);
 
 const gravity = 0.7;
 
-// setInterval(function(){   
-//     console.log(Math.floor((Math.random()*100)+1)); 
-//  }, 1000);
-
 let r = Math.random();
 
 setInterval(function(){   
@@ -38,7 +34,7 @@ const shop = new Sprite({
 })
 
 
-const player = new Fighter({
+const playerBuilder = {
     position:{
         x:200,
         y:0
@@ -97,9 +93,11 @@ const player = new Fighter({
         height: 50
     },
     health: 100,
-})
+};
 
-const enemy = new Fighter({
+let player = new Fighter(playerBuilder);
+
+const enemyBuilder = {
     position:{
         x:740,
         y:0
@@ -154,7 +152,9 @@ const enemy = new Fighter({
         height: 50
     },
     health: 80,
-})
+};
+
+let enemy = new Fighter(enemyBuilder);
 
 const setAi = document.getElementById('setAi');
 
@@ -188,8 +188,33 @@ let timerId;
 
 decreaseTimer();
 
+const restart = document.getElementById('restart');
+
+restart.addEventListener('click', function handleClick() {
+
+    clearTimeout(timerId);
+    timer = 60;
+    decreaseTimer();
+
+    player = new Fighter(playerBuilder);
+    player.position.x = 200;
+    player.update();
+
+    enemy = new Fighter(enemyBuilder);
+    enemy.position.x = 740;
+    enemy.update();
+
+    gsap.to('#playerHealth', {
+        width: player.health + '%'
+    })
+
+    gsap.to('#enemyHealth', {
+        width: (enemy.health/enemy.health)*100  + '%'
+    })
+});
+
 function animate(){
-    console.log(r)
+    
     window.requestAnimationFrame(animate);
     c.fillStyle = "black";
     c.fillRect(0,0, canvas.width, canvas.height);
@@ -291,6 +316,10 @@ function animate(){
         determineWinner({player, enemy, timerId});
     }
 
+    if(timer  === 0 ){
+        determineWinner(player, enemy, timerId);
+    }
+
     if(enemy.isAi){
         const enemyControl = new Ai(enemy, player);
         enemyControl.decideAction(r);
@@ -316,7 +345,7 @@ window.addEventListener('keydown', (e) => {
                 player.velocity.y = -20;
             }
         break
-        case ' ':
+        case 's':
             player.attack()
         break
     }

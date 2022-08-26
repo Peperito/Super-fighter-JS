@@ -76,6 +76,7 @@ class Fighter extends Sprite {
         this.color = color
         this.isAttacking
         this.health= health
+        
         this.framesCurrent = 0
         this.framesElapsed = 0
         this.framesHold = 10
@@ -83,6 +84,9 @@ class Fighter extends Sprite {
         this.isBlocking = true
         this.dead = false
         this.isAi = false
+
+        this.startingHealth = health
+        this.startingPosition = position
 
         for(const sprite in this.sprites) {
             sprites[sprite].image = new Image()
@@ -146,7 +150,11 @@ class Fighter extends Sprite {
         }
 
         if ( this.image === this.sprites.attack1.image && this.framesCurrent < this.sprites.attack1.framesMax -1 ) return
-        if ( this.image === this.sprites.takeHit.image && this.framesCurrent < this.sprites.takeHit.framesMax -1 ) return
+
+        if ( this.image === this.sprites.takeHit.image && this.framesCurrent < this.sprites.takeHit.framesMax -1 ) {
+            this.velocity.x = 0;
+            return
+        }
 
         switch(sprite) {
             case 'idle':
@@ -221,7 +229,6 @@ class Ai {
         window.dispatchEvent(new KeyboardEvent('keydown', {
             'key': 'ArrowDown'
         }));
-        console.log('attacked')
         window.dispatchEvent(new KeyboardEvent('keyup', {
             'key': 'ArrowDown'
         }));
@@ -260,6 +267,7 @@ class Ai {
             }));
         }
     }
+
     AiBeIdle(){
         window.dispatchEvent(new KeyboardEvent('keyup', {
             'key': 'ArrowRight',
@@ -270,28 +278,41 @@ class Ai {
 
     decideAction(r){
 
+        //Decide on Attacking
         if(Math.abs(this.self.position.x - this.enemy.position.x) < 200 ){
             if ( this.self.image === this.self.sprites.attack1.image && this.self.framesCurrent < this.self.sprites.attack1.framesMax -1 ) return;
-            if(r < 0.4){
+            if(r < 0.3){
                 this.AiAttack();
+            } else {
+                this.AiBeIdle();
             }
         }
 
+        // Decide on Jumping
         if(this.self.position.y > this.enemy.position.y){
             if(r < 0.2){
                 this.AiJump();
-            }
-        }
-
-        if(this.self.position.x - this.enemy.position.x > 600){
-            if(r < 0.80){
-                this.AiMoveLeft();
             } else {
-                this.AiMoveRight();
+                this.AiBeIdle()
             }
         }
 
-        if(this.self.position.x - this.enemy.position.x > 200 && this.self.position.x - this.enemy.position.x > 200){
+        if(r < 0.1){
+            this.AiJump();
+        }
+
+        // Decide on Moving
+        if(this.self.position.x - this.enemy.position.x > 600){
+            if(r < 0.40){
+                this.AiMoveLeft();
+            } else  if (r < 0.45) {
+                this.AiMoveRight();
+            } else {
+                this.AiBeIdle()
+            }
+        }
+
+        if(this.self.position.x - this.enemy.position.x > 200 && this.self.position.x - this.enemy.position.x < 600){
             if(r < 0.50){
                 this.AiMoveLeft();
             } else {
@@ -300,10 +321,12 @@ class Ai {
         }
 
         if(this.self.position.x - this.enemy.position.x < -600){
-            if(r < 0.80){
+            if(r < 0.40){
                 this.AiMoveRight();
-            } else {
+            } else if (r < 0.45) {
                 this.AiMoveLeft();
+            } else {
+                this.AiBeIdle();
             }
         }
 
@@ -329,6 +352,10 @@ class Ai {
             } else {
                 this.AiMoveRight();
             }
+        }
+
+        if (this.self.dead){
+            this.velocity.x = 0;
         }
 
     }

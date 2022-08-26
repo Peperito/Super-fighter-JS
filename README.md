@@ -13,8 +13,6 @@ https://www.youtube.com/watch?v=vyqbNFMDRGQ&ab_channel=ChrisCourses
 
 - Added Background, Title and page decoration
 
-- Added Text "Fight!" to announcer
-
 - Added different health value for each character
 
 - Only allow 1 jump
@@ -27,9 +25,18 @@ https://www.youtube.com/watch?v=vyqbNFMDRGQ&ab_channel=ChrisCourses
 
 - Created new Frames on Hit to balance the game
 
+- Add Stun lock
+
+- Add Restart Button
+
+- Changed Commands
+
+- Added Text "Fight!" to announcer
+
+
 ### To be done
 
-- Add Stun lock (less frames on block)
+- Reduce Stun Lock on block
 
 - Add custom block animation
 
