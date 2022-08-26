@@ -33,6 +33,8 @@ https://www.youtube.com/watch?v=vyqbNFMDRGQ&ab_channel=ChrisCourses
 
 - Added Text "Fight!" to announcer
 
+- Added Invicibility during Stun Lock
+
 
 ### To be done
 
