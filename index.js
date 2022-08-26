@@ -257,11 +257,11 @@ restart.addEventListener('click', function handleClick() {
     enemy.update();
 
     gsap.to('#playerHealth', {
-        width: player.health + '%'
+        width: (player.health/player.startingHealth)*100  + '%'
     })
 
     gsap.to('#enemyHealth', {
-        width: (enemy.health/enemy.health)*100  + '%'
+        width: (enemy.health/enemy.startingHealth)*100  + '%'
     })
 });
 
@@ -333,7 +333,7 @@ function animate(){
         player.isAttacking = false;
 
         gsap.to('#enemyHealth', {
-            width: enemy.health + '%'
+            width: (enemy.health/enemy.startingHealth )* 100 + '%'
         })
     }
 
@@ -354,7 +354,7 @@ function animate(){
         enemy.isAttacking = false;
         
         gsap.to('#playerHealth', {
-            width: player.health + '%'
+            width: (player.health/player.startingHealth )* 100 + '%'
         })
     }   
 
@@ -410,7 +410,7 @@ function animate(){
         enemy.takeHit();
 
         gsap.to('#enemyHealth', {
-            width: enemy.health + '%'
+            width: (enemy.health/enemy.startingHealth )* 100 + '%'
         })
     }
 
@@ -423,7 +423,7 @@ function animate(){
         player.takeHit();
 
         gsap.to('#playerHealth', {
-            width: player.health + '%'
+            width: (player.health/player.startingHealth )* 100 + '%'
         })
     }
 

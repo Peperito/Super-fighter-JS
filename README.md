@@ -13,6 +13,8 @@ https://www.youtube.com/watch?v=vyqbNFMDRGQ&ab_channel=ChrisCourses
 
 - Added Background, Title and page decoration
 
+- Added Super Attack (only 1 charge)
+
 - Added different health value for each character
 
 - Only allow 1 jump
@@ -41,8 +43,6 @@ https://www.youtube.com/watch?v=vyqbNFMDRGQ&ab_channel=ChrisCourses
 - Reduce Stun Lock on block
 
 - Add custom block animation
-
-- Create Super Attack with custom animation
 
 - Improve AI
 
