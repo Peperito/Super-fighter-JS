@@ -1,5 +1,5 @@
 class Sprite {
-    constructor({ position, imageSrc, scale = 1, framesMax = 1, offset = {x:0, y:0} }) {
+    constructor({ position, imageSrc, scale = 1, framesMax = 1, offset = {x:0, y:0}, velocity = {x:0, y:0}, attackBox = { offset: {}, width: undefined, height: undefined} }) {
         this.position = position
         this.width = 50
         this.height = 150
@@ -11,6 +11,16 @@ class Sprite {
         this.framesElapsed = 0
         this.framesHold = 10
         this.offset = offset
+        this.velocity = velocity
+        this.attackBox = {
+            position: {
+                x: this.position.x,
+                y: this.position.y
+            },
+            offset: attackBox.offset,
+            width: attackBox.width,
+            height: attackBox.height
+        }
     }
 
     draw() {
@@ -41,6 +51,13 @@ class Sprite {
     }
 
     update()  {
+
+        this.position.x += this.velocity.x;
+        this.position.y += this.velocity.y;
+
+        this.attackBox.position.x = this.position.x + this.attackBox.offset.x
+        this.attackBox.position.y = this.position.y + this.attackBox.offset.y
+        
         this.draw()
         this.animateFrames()
     }
@@ -85,6 +102,7 @@ class Fighter extends Sprite {
         this.dead = false
         this.isAi = false
         this.invincible = false
+        this.superCount = 0
 
         this.startingHealth = health
         this.startingPosition = position
@@ -124,6 +142,14 @@ class Fighter extends Sprite {
 
         this.switchSprite('attack1');
         this.isAttacking = true;
+    }
+
+    superAttack(){
+
+        this.switchSprite('attack1');
+        this.isAttacking = true;
+        this.superCount++;
+
     }
 
     takeHit(){
@@ -286,6 +312,16 @@ class Ai {
         }));
     }
 
+    AiSuperAttack(){
+        window.dispatchEvent(new KeyboardEvent('keydown', {
+            'key': '#'
+        }));
+        window.dispatchEvent(new KeyboardEvent('keyup', {
+            'key': '#'
+        }));
+    }
+
+
     decideAction(r){
 
         //Decide on Attacking
@@ -366,6 +402,10 @@ class Ai {
 
         if (this.self.dead){
             this.velocity.x = 0;
+        }
+
+        if(this.self.health < 20){
+            this.AiSuperAttack()
         }
 
     }

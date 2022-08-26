@@ -33,6 +33,58 @@ const shop = new Sprite({
     framesMax: 6
 })
 
+const superAttackPlayer = new Sprite({
+    position:{
+        x: 0,
+        y: 2000
+    },
+    imageSrc: './assets/samuraiMack/super.png',
+    scale: 2,
+    framesMax: 3,
+    velocity: {
+        x: 12,
+        y: 0,
+    },
+    offset: {
+        x:100,
+        y:156
+    },
+    attackBox: {
+        offset: {
+            x: 60,
+            y: 0
+        },
+        width: 80,
+        height: 110
+    }
+})
+
+const superAttackEnemy = new Sprite({
+    position:{
+        x: 0,
+        y: 2000
+    },
+    imageSrc: './assets/kenji/super.png',
+    scale: 2,
+    framesMax: 3,
+    velocity: {
+        x: -8,
+        y: 0,
+    },
+    offset: {
+        x:255,
+        y:127
+    },
+    attackBox: {
+        offset: {
+            x: -60,
+            y: 0
+        },
+        width: 100,
+        height: 200
+    },
+})
+
 
 const playerBuilder = {
     position:{
@@ -324,6 +376,57 @@ function animate(){
         const enemyControl = new Ai(enemy, player);
         enemyControl.decideAction(r);
     }
+
+    if(player.framesCurrent === 4 && player.superCount === 1){
+        superAttackPlayer.position.x = player.position.x;
+        superAttackPlayer.position.y = player.position.y;
+
+        superAttackPlayer.attackBox.position.x = superAttackPlayer.position - superAttackPlayer.attackBox.offset
+        superAttackPlayer.attackBox.position.y = superAttackPlayer.position - superAttackPlayer.attackBox.offset
+
+        player.superCount++;
+    }
+
+    superAttackPlayer.update();
+
+    if(enemy.framesCurrent === 2 && enemy.superCount === 1){
+        superAttackEnemy.position.x = enemy.position.x;
+        superAttackEnemy.position.y = enemy.position.y;
+
+        superAttackEnemy.attackBox.position.x = superAttackEnemy.position - superAttackEnemy.attackBox.offset
+        superAttackEnemy.attackBox.position.y = superAttackEnemy.position - superAttackEnemy.attackBox.offset
+
+        enemy.superCount++;
+    }
+
+    superAttackEnemy.update();
+
+    if(
+        rectangularCollision({
+            rectangle1: superAttackPlayer,
+            rectangle2: enemy
+        })
+        ){
+        enemy.takeHit();
+
+        gsap.to('#enemyHealth', {
+            width: enemy.health + '%'
+        })
+    }
+
+    if(
+        rectangularCollision({
+            rectangle1: superAttackEnemy,
+            rectangle2: player
+        })
+        ){
+        player.takeHit();
+
+        gsap.to('#playerHealth', {
+            width: player.health + '%'
+        })
+    }
+
     
 }
 
@@ -348,6 +451,9 @@ window.addEventListener('keydown', (e) => {
         case 's':
             player.attack()
         break
+        case 'e':
+            player.superAttack();
+        break
     }
     }
 
@@ -368,6 +474,9 @@ window.addEventListener('keydown', (e) => {
         break
         case 'ArrowDown':
             enemy.attack()
+        break
+        case '#':
+            enemy.superAttack();
         break
     }
     }
