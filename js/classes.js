@@ -327,7 +327,7 @@ class Ai {
         //Decide on Attacking
         if(Math.abs(this.self.position.x - this.enemy.position.x) < 200 ){
             if ( this.self.image === this.self.sprites.attack1.image && this.self.framesCurrent < this.self.sprites.attack1.framesMax -1 ) return;
-            if(r < 0.3){
+            if(r < 0.25){
                 this.AiAttack();
             } else {
                 this.AiBeIdle();
